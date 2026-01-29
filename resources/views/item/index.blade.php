@@ -4,8 +4,8 @@
         @include('layouts.flash-messages')
         <a class="btn btn-primary" href="{{ route('items.create') }}" role="button">add</a>
         {{--  --}}
-        {{-- <form method="POST" enctype="multipart/form-data" action="{{ route('item.import') }}"> --}}
-        <form method="POST" enctype="multipart/form-data" action="">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('item.import') }}">
+            {{-- <form method="POST" enctype="multipart/form-data" action=""> --}}
             @csrf
             <input type="file" id="uploadName" name="item_upload" required>
             <button type="submit" class="btn btn-info btn-primary ">Import Excel File</button>
