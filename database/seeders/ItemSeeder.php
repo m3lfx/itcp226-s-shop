@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Item;
+use App\Models\Stock;
+use Log;
 
 class ItemSeeder extends Seeder
 {
@@ -16,12 +18,17 @@ class ItemSeeder extends Seeder
     {
         for ($i = 0; $i < 30; $i++) {
             $item = new Item();
-            $item->description = $faker->word();
-            $item->cost_price = $faker->randomFloat(2, 20, 100);
+            $item->description = $faker->realText(20);
+            $item->cost_price = $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 6);
 
-            $item->sell_price =  $faker->randomFloat(2, 20, 100);
+            $item->sell_price = $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 6);
             $item->img_path = 'default.jpg';
             $item->save();
+            Log::info("item id", array("item id" => $item->item_id));
+            $stock = new Stock;
+            $stock->item_id = $item->item_id;
+            $stock->quantity = 20;
+            $stock->save();
         }
     }
 }
