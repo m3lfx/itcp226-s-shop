@@ -12,7 +12,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = DB::table('item')->join('stock', 'item.item_id', '=', 'stock.item_id')->get();
+        $items = DB::table('item as i')
+            ->leftJoin('stock as s', 'i.item_id', '=', 's.item_id')
+            ->select('i.*', 's.quantity')
+            ->get();
+        // dd($items);
 
         return view('item.index', compact('items'));
     }
