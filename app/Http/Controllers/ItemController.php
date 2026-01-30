@@ -11,6 +11,8 @@ use App\Models\Stock;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ItemImport;
 use App\Imports\ItemStockImport;
+use Illuminate\Support\Facades\Session;
+use App\Cart;
 
 class ItemController extends Controller
 {
@@ -152,8 +154,22 @@ class ItemController extends Controller
 
     public function getItems()
     {
-        // dump(Session::get('cart'));
+        dump(Session::get('cart'));
         $items = DB::table('item')->join('stock', 'item.item_id', '=', 'stock.item_id')->get();
         return view('shop.index', compact('items'));
+    }
+
+    public function addToCart($id)
+    {
+        $item = Item::find($id);
+        // dd($item);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        // dd($oldCart);
+        $cart = new Cart($oldCart);
+        // dd($cart);
+        $cart->add($item, $id);
+        // dd($cart);
+        Session::put('cart', $cart);
+        return redirect('/')->with('success', 'item added to cart');
     }
 }
