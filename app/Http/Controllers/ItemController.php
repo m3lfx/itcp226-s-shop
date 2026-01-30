@@ -10,6 +10,7 @@ use App\Models\Item;
 use App\Models\Stock;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ItemImport;
+use App\Imports\ItemStockImport;
 
 class ItemController extends Controller
 {
@@ -136,7 +137,7 @@ class ItemController extends Controller
     {
 
         Excel::import(
-            new ItemImport,
+            new ItemStockImport,
             request()
                 ->file('item_upload')
                 ->storeAs(
