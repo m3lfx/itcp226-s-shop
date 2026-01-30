@@ -20,5 +20,5 @@ Route::get('/', function () {
 
 Route::post('/items-import', [ItemController::class, 'import'])->name('item.import');
 
-Route::resource('csutomers', CustomerController::class);
+Route::resource('customers', CustomerController::class);
 Route::resource('items', ItemController::class);
