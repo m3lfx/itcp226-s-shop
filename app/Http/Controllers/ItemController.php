@@ -173,6 +173,18 @@ class ItemController extends Controller
         return redirect('/')->with('success', 'item added to cart');
     }
 
+    public function getCart()
+    {
+        // dump(Session::get('cart'));
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        // dd($cart);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
     public function postCheckout()
     {
 

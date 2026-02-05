@@ -48,8 +48,8 @@
     </div>
     </li>
     <li class="nav-link">
-        {{-- <a href="{{ route('getCart') }}"> --}}
-        <a href="">
+        <a href="{{ route('getCart') }}">
+            {{-- <a href=""> --}}
             <i class="fa-solid fa-cart-shopping"></i> Shopping Cart
             <span
                 class="badge rounded-pill bg-danger">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span>
