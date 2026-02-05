@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,5 +27,8 @@ Route::get('/checkout', [ItemController::class, 'postCheckout'])->name('checkout
 
 Route::post('/items-import', [ItemController::class, 'import'])->name('item.import');
 
+Route::prefix('admin')->group(function () {
+    Route::get('/users', [DashboardController::class, 'getUsers'])->name('admin.users');
+});
 Route::resource('customers', CustomerController::class);
 Route::resource('items', ItemController::class);
