@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Storage;
 use App\Models\Item;
+use App\Models\Order;
 use App\Models\Stock;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ItemImport;
 use App\Imports\ItemStockImport;
 use Illuminate\Support\Facades\Session;
 use App\Cart;
+use Carbon\Carbon;
 
 class ItemController extends Controller
 {
@@ -221,7 +223,7 @@ class ItemController extends Controller
         $cart = new Cart($oldCart);
         // dd($cart, $cart->items);
         try {
-            $customer = Customer::where('user_id', Auth::id())->first();
+            // $customer = Customer::where('user_id', Auth::id())->first();
             // dd($customer);
             DB::beginTransaction();
             $order = new Order();
@@ -231,9 +233,9 @@ class ItemController extends Controller
             $order->date_shipped = Carbon::now()->addDays(5);
 
             $order->shipping = 10.00;
-            // $order->status = 'Processing';
+            $order->status = 'processing';
 
-            // $order->save();
+            $order->save();
             // dd($cart->items);
 
             foreach ($cart->items as $items) {
@@ -254,7 +256,7 @@ class ItemController extends Controller
             }
             // dd($order);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             DB::rollback();
             // dd($order);
             return redirect()->route('getCart')->with('error', $e->getMessage());
