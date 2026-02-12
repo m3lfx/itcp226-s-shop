@@ -33,6 +33,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/customers', [DashboardController::class, 'getCustomers'])->name('admin.customers');
     Route::get('/orders', [DashboardController::class, 'getOrders'])->name('admin.orders');
     Route::get('/order/{id}', [OrderController::class, 'processOrder'])->name('admin.orderDetails');
+    Route::post('/order/{id}', [OrderController::class, 'orderUpdate'])->name('admin.orderUpdate');
 });
 Route::resource('customers', CustomerController::class);
 Route::resource('items', ItemController::class);

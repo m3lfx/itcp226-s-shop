@@ -36,17 +36,17 @@
             <hr />
             <div className="col-12 col-lg-3 mt-5">
                 <h4 className="my-4">Status</h4>
-                {{-- <form action="{{ route('admin.orderUpdate', $customer->orderinfo_id) }}" method="POST"> --}}
-                @csrf
-                <div class="form-group">
-                    <label for="status">Example select</label>
-                    <select class="form-control" id="status" name="status">
-                        <option value="Processing">Processing</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Canceled">Cancel</option>
-                    </select>
-                </div>
-                <input type="submit" value="Update Order Status" class="btn btn-primary">
+                <form action="{{ route('admin.orderUpdate', $customer->orderinfo_id) }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="status">Example select</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="Processing">Processing</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Canceled">Cancel</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Update Order Status" class="btn btn-primary">
                 </form>
 
 
