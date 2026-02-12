@@ -37,7 +37,7 @@
 <body>
     @include('layouts.header')
     @yield('body')
-    {{-- @stack('scripts') --}}
+    @stack('scripts')
 
 </body>
 
