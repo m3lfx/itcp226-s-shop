@@ -228,7 +228,7 @@ class ItemController extends Controller
             DB::beginTransaction();
             $order = new Order();
             // $order->customer_id = $customer->customer_id;
-            $order->customer_id = 1;
+            $order->customer_id = 2;
             $order->date_placed = now();
             $order->date_shipped = Carbon::now()->addDays(5);
 
