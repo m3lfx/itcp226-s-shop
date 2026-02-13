@@ -61,6 +61,6 @@ class OrderController extends Controller
         }
         // return redirect()->route('admin.orders')->with('success', 'order updated');
 
-        redirect()->route('admin.orders')->with('error', 'email not sent');
+        return redirect()->route('admin.orders')->with('error', 'email not sent');
     }
 }
