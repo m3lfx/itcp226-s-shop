@@ -6,27 +6,27 @@
         <div class="container">
             {{ Auth::check() ? Auth::user()->name : '' }}
 
-            {{-- <div class="container">
+            <div class="container">
                 <hr>
                 <h2>monthly sales</h2>
                 {!! $salesChart->container() !!}
 
-            </div> --}}
+            </div>
             <div class="container">
                 <hr>
                 <h2>customer chart</h2>
                 {!! $customerChart->container() !!}
 
             </div>
-            {{-- <div class="container">
+            <div class="container">
                 <hr>
                 <h2>item sold chart</h2>
                 {!! $itemChart->container() !!}
 
-            </div> --}}
-            {{-- {!! $salesChart->script() !!} --}}
+            </div>
+            {!! $salesChart->script() !!}
             {!! $customerChart->script() !!}
-            {{-- {!! $itemChart->script() !!} --}}
+            {!! $itemChart->script() !!}
 
         </div>
     @endsection
