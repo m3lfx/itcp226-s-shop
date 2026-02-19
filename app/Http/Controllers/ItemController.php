@@ -9,12 +9,14 @@ use Storage;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Stock;
+use App\Models\Customer;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ItemImport;
 use App\Imports\ItemStockImport;
 use Illuminate\Support\Facades\Session;
 use App\Cart;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -156,7 +158,7 @@ class ItemController extends Controller
 
     public function getItems()
     {
-        dump(Session::get('cart'));
+        // dump(Session::get('cart'));
         $items = DB::table('item')->join('stock', 'item.item_id', '=', 'stock.item_id')->get();
         return view('shop.index', compact('items'));
     }
@@ -226,9 +228,11 @@ class ItemController extends Controller
             // $customer = Customer::where('user_id', Auth::id())->first();
             // dd($customer);
             DB::beginTransaction();
+            $customer = Customer::where('user_id', Auth::id())->first();
+            // dd($customer);
             $order = new Order();
-            // $order->customer_id = $customer->customer_id;
-            $order->customer_id = 2;
+            $order->customer_id = $customer->customer_id;
+            // $order->customer_id = 2;
             $order->date_placed = now();
             $order->date_shipped = Carbon::now()->addDays(5);
 
